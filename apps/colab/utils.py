@@ -5,11 +5,10 @@ def activate_text_env(path):
     Function to read api key text file from gdrive into colab.
     """
     with open(path) as f:
-        lines = f.readlines()
-        variables = lines[::2]
-        keys = lines[1::2]
-
-    for v, k in zip(variables, keys):
-        os.environ[v.strip()] = k.strip()
-
+        while True:
+            variable = f.readline().strip()
+            if len(variable) == 0:
+                break
+            key = f.readline().strip()
+            os.environ[variable] = key
     return 0
